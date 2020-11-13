@@ -6,7 +6,7 @@ import com.pram.core.repository.NoteDataSource
 import com.pram.memorynotes.framework.db.DatabaseService
 import com.pram.memorynotes.framework.db.NoteEntity
 
-class RoomNoteNoteDataSource(context: Context): NoteDataSource {
+class RoomNoteDataSource(context: Context): NoteDataSource {
     val noteDao = DatabaseService.getInstance(context).noteDao()
 
 

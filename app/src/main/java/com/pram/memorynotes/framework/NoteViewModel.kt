@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class NoteViewModel(application: Application): AndroidViewModel(application) {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    val repository = NoteRepository(RoomNoteNoteDataSource(application))
+    val repository = NoteRepository(RoomNoteDataSource(application))
 
     val useCases = UseCases(
         AddNote(repository),
