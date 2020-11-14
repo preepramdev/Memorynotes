@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class Usecases {
+class UsecasesModule {
     @Provides
     fun provideUsecases(repository: NoteRepository) = UseCases(
         AddNote(repository),

@@ -9,21 +9,26 @@ import com.pram.core.usecase.AddNote
 import com.pram.core.usecase.GetAllNotes
 import com.pram.core.usecase.GetNote
 import com.pram.core.usecase.RemoveNote
+import com.pram.memorynotes.framework.di.ApplicationModule
+import com.pram.memorynotes.framework.di.DaggerViewModelComponent
+//import com.pram.memorynotes.framework.di.DaggerViewModelComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class ListViewModel(application: Application) : AndroidViewModel(application) {
     val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    val repository = NoteRepository(RoomNoteDataSource(application))
+    @Inject
+    lateinit var useCases: UseCases
 
-    val useCases = UseCases(
-        AddNote(repository),
-        GetAllNotes(repository),
-        GetNote(repository),
-        RemoveNote(repository)
-    )
+    init {
+        DaggerViewModelComponent.builder()
+            .applicationModule(ApplicationModule(getApplication()))
+            .build()
+            .inject(this)
+    }
 
     val notes = MutableLiveData<List<Note>>()
 
