@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModel(application: Application): AndroidViewModel(application) {
+class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     val repository = NoteRepository(RoomNoteDataSource(application))
@@ -39,6 +39,13 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
         coroutineScope.launch {
             val note = useCases.getNote(id)
             currentNote.postValue(note)
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        coroutineScope.launch {
+            useCases.removeNote(note)
+            saved.postValue(true)
         }
     }
 }
