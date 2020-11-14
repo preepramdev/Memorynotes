@@ -1,10 +1,7 @@
 package com.pram.memorynotes.framework.di
 
 import com.pram.core.repository.NoteRepository
-import com.pram.core.usecase.AddNote
-import com.pram.core.usecase.GetAllNotes
-import com.pram.core.usecase.GetNote
-import com.pram.core.usecase.RemoveNote
+import com.pram.core.usecase.*
 import com.pram.memorynotes.framework.UseCases
 import dagger.Module
 import dagger.Provides
@@ -16,6 +13,7 @@ class UsecasesModule {
         AddNote(repository),
         GetAllNotes(repository),
         GetNote(repository),
-        RemoveNote(repository)
+        RemoveNote(repository),
+        GetWordCount()
     )
 }

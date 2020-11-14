@@ -35,6 +35,7 @@ class NotesListAdapter(var notes: ArrayList<Note>, val action: ListAction) :
         private val noteTitle = view.title
         private val noteContent = view.content
         private val noteDate = view.date
+        private val noteWord = view.wordCount
 
         fun bind(note: Note) {
             noteTitle.text = note.title
@@ -47,6 +48,8 @@ class NotesListAdapter(var notes: ArrayList<Note>, val action: ListAction) :
             layout.setOnClickListener {
                 action.onClick(note.id)
             }
+
+            noteWord.text = "Words: ${note.wordCount }"
         }
     }
 }
